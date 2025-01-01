@@ -1,0 +1,113 @@
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 3px double #808080;
+    background: #ffffff;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+/* 만다라트 그리드 */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+    background: #808080;
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* 그리드 셀 */
+.grid-cell {
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    font-family: Tahoma, Arial, sans-serif;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    padding: 5px;
+    overflow: hidden;
+    resize: none;
+}
+
+/* 중앙 목표 강조 */
+.center-goal {
+    background-color: #ffffff; /* 흰색 배경 */
+    color: #000000; /* 검정 텍스트 */
+    font-weight: bold; /* 볼드 처리 */
+    font-size: 16px; /* 크기 증가 */
+    text-align: center;
+}
+
+/* 세부 목표 강조 (중심 위치) */
+.sub-goal {
+    font-weight: bold; /* 볼드 처리 */
+    color: #000000; /* 검정 텍스트 */
+    text-align: center;
+    background-color: #f9f9f9; /* 연한 회색 배경 */
+}
+
+/* 3x3 섹션 - 밝은 색상 */
+.section-light {
+    background-color: #f0f0f0;
+}
+
+/* 3x3 섹션 - 어두운 색상 */
+.section-dark {
+    background-color: #dcdcdc;
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.retro-button {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    background: linear-gradient(to bottom, #dcdcdc, #ffffff);
+    border: 2px outset #808080;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.retro-button:active {
+    border: 2px inset #808080;
+    background: linear-gradient(to bottom, #ffffff, #dcdcdc);
+}
+
+/* 푸터 스타일 */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    font-size: 14px;
+    color: #666;
+    border-top: 1px solid #ccc;
+}
+
+.footer a {
+    color: #666;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
