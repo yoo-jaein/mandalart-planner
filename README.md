@@ -1,4 +1,5 @@
 # Mandalart Planner
+<img width="1706" alt="image" src="https://github.com/user-attachments/assets/a23c6ecd-3ed4-4626-996f-c06b63bf685b" />
 
 A simple and intuitive web application for creating **Mandalart Plans**, helping users structure and visualize their goals.
 
