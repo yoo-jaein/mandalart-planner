@@ -2,8 +2,6 @@
 
 A simple and intuitive web application for creating **Mandalart Plans**, helping users structure and visualize their goals.
 
-This project is built with [React](https://reactjs.org/) and styled using [Tailwind CSS](https://tailwindcss.com/).
-
 ---
 
 ## Features
