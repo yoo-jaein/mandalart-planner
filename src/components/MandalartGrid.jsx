@@ -1,25 +1,33 @@
 import React from "react";
 
-function MandaratGrid({ grid, onCellChange }) {
+function MandalartGrid({ grid, onCellChange }) {
     return (
         <div className="grid">
             {grid.map((row, rowIndex) =>
-                row.map((cell, colIndex) => (
-                    <input
-                        key={`${rowIndex}-${colIndex}`}
-                        value={cell}
-                        onChange={(e) => onCellChange(rowIndex, colIndex, e.target.value)}
-                        className={`grid-cell ${
-                            rowIndex === 4 && colIndex === 4
-                                ? "center-goal" // 중앙 목표 강조
-                                : rowIndex % 3 === 1 && colIndex % 3 === 1
-                                    ? "sub-goal" // 각 방향의 중심 강조
-                                    : Math.floor(rowIndex / 3) % 2 === Math.floor(colIndex / 3) % 2
-                                        ? "section-light"
-                                        : "section-dark"
-                        }`}
-                    />
-                ))
+                row.map((cell, colIndex) => {
+                    const isCenterGoal = rowIndex === 4 && colIndex === 4; // 중앙 목표
+                    const isSubGoal =
+                        (rowIndex % 3 === 1 && colIndex % 3 === 1) || // 다른 서브 목표
+                        (rowIndex >= 3 && rowIndex <= 5 && colIndex >= 3 && colIndex <= 5 && !isCenterGoal); // 중앙 3x3의 8칸
+
+                    return (
+                        <input
+                            key={`${rowIndex}-${colIndex}`}
+                            value={cell}
+                            onChange={(e) => onCellChange(rowIndex, colIndex, e.target.value)}
+                            placeholder={isCenterGoal ? "Main Goal" : isSubGoal ? "Sub Goal" : ""} // 플레이스홀더 설정
+                            className={`grid-cell ${
+                                isCenterGoal
+                                    ? "center-goal" // 중앙 목표 강조
+                                    : isSubGoal
+                                        ? "sub-goal" // 서브 목표 강조
+                                        : Math.floor(rowIndex / 3) % 2 === Math.floor(colIndex / 3) % 2
+                                            ? "section-light"
+                                            : "section-dark"
+                            }`}
+                        />
+                    );
+                })
             )}
         </div>
     );
@@ -60,4 +68,4 @@ export function updateGridWithSubGoals(grid) {
     return updatedGrid;
 }
 
-export default MandaratGrid;
+export default MandalartGrid;

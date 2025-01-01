@@ -32,7 +32,7 @@ function App() {
                 .then((dataUrl) => {
                     const link = document.createElement("a");
                     link.href = dataUrl;
-                    link.download = "mandalart-plan-highres.png";
+                    link.download = "mandalart-plan.png";
                     link.click();
                 })
                 .catch((error) => {
