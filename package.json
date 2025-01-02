@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "dom-to-image-more": "^3.5.0",
+    "firebase": "^11.1.0",
+    "nanoid": "^5.0.9",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.1.1",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",

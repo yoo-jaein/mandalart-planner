@@ -1,58 +1,48 @@
-import React, { useState, useRef } from "react";
-import MandalartGrid, { updateGridWithSubGoals } from "./components/MandalartGrid";
-import domtoimage from "dom-to-image-more";
+import React from "react";
+import MandalartGrid, {updateGridWithSubGoals} from "./components/MandalartGrid";
+import { firestore } from "./firebase";
+import { doc, setDoc } from "firebase/firestore";
+import MandalartGridData from "./domain/MandalartGridData";
+import MandalartLayout from "./components/MandalartLayout";
+import ActionButtons from "./components/ActionButtons";
+import useMandalart from "./hooks/useMandalart";
+import { customAlphabet } from "nanoid";
 
 function App() {
-    const [grid, setGrid] = useState(Array(9).fill(null).map(() => Array(9).fill("")));
-    const gridRef = useRef();
+    const { grid, setGrid, gridRef, handleCellChange, downloadScreenshot } = useMandalart(
+        Array(9).fill(null).map(() => Array(9).fill("")),
+        updateGridWithSubGoals
+    );
 
-    // 셀 값 변경 핸들러
-    const handleCellChange = (row, col, value) => {
-        const newGrid = grid.map((r, rowIndex) =>
-            r.map((cell, colIndex) => (rowIndex === row && colIndex === col ? value : cell))
-        );
-        const updatedGrid = updateGridWithSubGoals(newGrid);
-        setGrid(updatedGrid);
-    };
+    const saveGrid = async () => {
+        try {
+            const gridData = new MandalartGridData(grid);
+            const jsonData = gridData.toJSON();
 
-    // 고화질 스크린샷 다운로드
-    const downloadScreenshot = async () => {
-        if (gridRef.current) {
-            const scale = 3; // 해상도 배율 (기본: 1)
-            const options = {
-                width: gridRef.current.offsetWidth * scale,
-                height: gridRef.current.offsetHeight * scale,
-                style: {
-                    transform: `scale(${scale})`,
-                    transformOrigin: "top left",
-                },
-            };
+            const customNanoid = customAlphabet("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 10);
+            const uniqueId = customNanoid();
 
-            domtoimage.toPng(gridRef.current, options)
-                .then((dataUrl) => {
-                    const link = document.createElement("a");
-                    link.href = dataUrl;
-                    link.download = "mandalart-plan.png";
-                    link.click();
-                })
-                .catch((error) => {
-                    console.error("Error capturing the screenshot: ", error);
-                });
+            const docRef = doc(firestore, "mandalarts", uniqueId);
+            await setDoc(docRef, jsonData);
+
+            const shareUrl = `${window.location.origin}/${uniqueId}`;
+
+            await navigator.clipboard.writeText(shareUrl);
+
+            alert(`The URL has been copied to your clipboard:\n${shareUrl}`);
+        } catch (error) {
+            console.error("Error saving Mandalart:", error);
+            alert("Failed to save the Mandalart.");
         }
     };
 
     return (
-        <div className="container">
-            <h1 style={{ border: "2px solid #000", padding: "10px", background: "#f0f0f0", marginBottom: "20px" }}>
-                Mandalart Planner
-            </h1>
+        <MandalartLayout>
             <div ref={gridRef}>
                 <MandalartGrid grid={grid} onCellChange={handleCellChange} />
             </div>
-            <div className="button-container">
-                <button className="retro-button" onClick={downloadScreenshot}>Download</button>
-            </div>
-        </div>
+            <ActionButtons onSave={saveGrid} onDownload={downloadScreenshot} saveLabel="Share" />
+        </MandalartLayout>
     );
 }
 
