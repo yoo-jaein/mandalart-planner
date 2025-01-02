@@ -1,5 +1,5 @@
 # Mandalart Planner
-<img width="1706" alt="image" src="https://github.com/user-attachments/assets/a23c6ecd-3ed4-4626-996f-c06b63bf685b" />
+<img width="1511" alt="image" src="https://github.com/user-attachments/assets/4fb2e1fc-a90b-4d03-8e67-e07a11547f27" />
 
 A simple and intuitive web application for creating **Mandalart Plans**, helping users structure and visualize their goals.
 
@@ -8,8 +8,10 @@ A simple and intuitive web application for creating **Mandalart Plans**, helping
 ## Features
 
 - **9x9 Mandalart Grid**: Allows users to fill in a Mandalart chart to plan their goals.
+- **Share Your Plan**: Generate a unique link to share your Mandalart with others.
 - **Download Plan**: Download your current Mandalart plan as an image.
 - **Main Goal and Sub-Goals**: Easily organize your main goal and its sub-goals with placeholders.
+
 
 ---
 
